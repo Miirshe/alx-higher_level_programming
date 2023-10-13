@@ -1,4 +1,12 @@
 def lookup(obj):
-    return obj
+    attributes = []
+    methods = []
 
-obj = lookup([1 , 2 , 3, 4 ,5])
+    for attr in dir(obj):
+        if not attr.startswith('__'):
+            if callable(getattr(obj, attr)):
+                methods.append(attr)
+            else:
+                attributes.append(attr)
+
+    return attributes + methods
